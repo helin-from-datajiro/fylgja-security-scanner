@@ -1,0 +1,83 @@
+{
+    "name": "fylgja-security",
+    "displayName": "FYLGJA Security Scanner",
+    "description": "Real-time security vulnerability scanner and auto-fixer. Detects SQL Injection, XSS, Command Injection, Hardcoded Secrets, Weak Cryptography, and Path Traversal.",
+    "version": "1.0.0",
+    "publisher": "odinbaba",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "security",
+        "vulnerability",
+        "scanner",
+        "sql-injection",
+        "xss",
+        "code-analysis"
+    ],
+    "activationEvents": [
+        "onLanguage:python",
+        "onLanguage:javascript",
+        "onLanguage:typescript",
+        "onLanguage:php",
+        "onLanguage:java"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "fylgja.scanFile",
+                "title": "FYLGJA: Scan Current File"
+            },
+            {
+                "command": "fylgja.scanWorkspace",
+                "title": "FYLGJA: Scan Entire Workspace"
+            },
+            {
+                "command": "fylgja.fixAll",
+                "title": "FYLGJA: Fix All Vulnerabilities in Current File"
+            }
+        ],
+        "configuration": {
+            "title": "FYLGJA Security Scanner",
+            "properties": {
+                "fylgja.scanOnSave": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically scan files when saved."
+                },
+                "fylgja.scanOnOpen": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically scan files when opened."
+                },
+                "fylgja.severityThreshold": {
+                    "type": "string",
+                    "default": "MEDIUM",
+                    "enum": [
+                        "CRITICAL",
+                        "HIGH",
+                        "MEDIUM"
+                    ],
+                    "description": "Minimum severity level to display."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/node": "18.x",
+        "@types/vscode": "^1.85.0",
+        "@vscode/vsce": "^3.7.1",
+        "typescript": "^5.3.0"
+    }
+}
